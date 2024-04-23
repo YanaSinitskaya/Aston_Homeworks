@@ -8,7 +8,7 @@ public class Main {
         System.out.println(homework.checkSumRange(44,972));
         System.out.println(homework.checkPositiveOrNegativeString(0));
         System.out.println(homework.checkPositiveOrNegativeBoolean(-1557));
-        System.out.println(homework.writePhraseNTimes("Hello\n", 4));
+        homework.writePhraseNTimes("Hello", 4);
         System.out.println(homework.isLeapYear(2024));
         homework.rewriteArray();
         homework.fillArray();

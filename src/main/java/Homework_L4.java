@@ -9,8 +9,7 @@ public class Homework_L4 {
     public void checkSumSign() {
         int a = 10;
         int b = -45;
-        int c = a + b;
-        if (c >= 0) {
+        if (a + b >= 0) {
             System.out.println("Сумма положительная");
 
         } else {
@@ -24,7 +23,7 @@ public class Homework_L4 {
             System.out.println("Красный");
         } else if (value > 0 && value <= 100) {
             System.out.println("Желтый");
-        } else if (value > 100) {
+        } else {
             System.out.println("Зеленый");
         }
     }
@@ -41,10 +40,8 @@ public class Homework_L4 {
 
     public boolean checkSumRange(int a, int b) {
         int sum = a + b;
-        if (sum >= 10 && sum <= 20) {
-            return true;
-        }
-        return false;
+
+        return sum >= 10 && sum <= 20;
     }
 
     public String checkPositiveOrNegativeString(int a) {
@@ -55,22 +52,17 @@ public class Homework_L4 {
     }
 
     public boolean checkPositiveOrNegativeBoolean(int a) {
-        if (a >= 0) {
-            return false;
-        }
-        return true;
+        return a >= 0;
     }
 
-    public String writePhraseNTimes(String phrase, int quantity) {
-        String repeat = phrase.repeat(quantity);
-        return repeat;
+    public void writePhraseNTimes(String phrase, int quanitty) {
+        for (int i = 0; i < quanitty ; i++) {
+            System.out.println(phrase);
+        }
     }
 
     public boolean isLeapYear(int year) {
-        if (year % 4 == 0 || year % 400 == 0 && year % 100 != 0) {
-            return true;
-        }
-        return false;
+        return year % 4 == 0 || year % 400 == 0 && year % 100 != 0;
     }
 
     public void rewriteArray() {
@@ -79,7 +71,7 @@ public class Homework_L4 {
         for (int i = 0; i < array.length; i++) {
             if (array[i] == 0) {
                 array[i] = 1;
-            } else if (array[i] == 1) {
+            } else {
                 array[i] = 0;
             }
         }
@@ -109,9 +101,11 @@ public class Homework_L4 {
         System.out.println("Массив задание 13 ");
         int[][] array = new int[4][4];
         for (int i = 0; i < array.length; i++) {
+            array[i][i] = 1;
+        }
+        for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array.length; j++) {
-                array[i][i] = 1;
-                System.out.print(array[i][j] + "");
+                System.out.print(array[i][j] + " ");
             }
             System.out.println();
         }
