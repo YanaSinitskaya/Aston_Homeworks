@@ -11,7 +11,7 @@ public class Lesson8_Main {
 
     }
 
-    public static int sumArray(String array[][]) throws MyArraySizeException, MyArrayDataException {
+    public static void sumArray(String array[][]) throws MyArraySizeException, MyArrayDataException {
         int sum = 0;
         if (array.length > 4 || array[0].length > 4) {
             throw new MyArraySizeException("Размер массива больше 4-ех");
@@ -25,6 +25,6 @@ public class Lesson8_Main {
                 }
             }
         }
-        return sum;
+        System.out.println(sum);
     }
 }
