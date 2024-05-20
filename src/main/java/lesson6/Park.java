@@ -1,3 +1,5 @@
+package lesson6;
+
 public class Park {
     String nameOfAttraction;
     Attraction attraction;
@@ -7,9 +9,9 @@ public class Park {
         this.attraction = new Attraction(infoAboutAttraction, workTime, price);
     }
 
-    public void OutputInformationOfPark() {
+    public void outputInformationOfPark() {
         System.out.println("nameOfAttraction: " + nameOfAttraction);
-        this.attraction.OutputInformationOfAttraction();
+        this.attraction.outputInformationOfAttraction();
     }
 
     class Attraction {
@@ -23,7 +25,7 @@ public class Park {
             this.price = price;
         }
 
-        public void OutputInformationOfAttraction() {
+        public void outputInformationOfAttraction() {
             System.out.println("infoAboutAttraction: " + infoAboutAttraction + "\n" +
                     "workTime: " + workTime + "\n" +
                     "price: " + price);
