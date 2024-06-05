@@ -8,7 +8,7 @@ public class Animal {
     }
 
     public void run(int distance) {
-        System.out.println("Бежит " + distance);
+
     }
 
     public void swim(int distance) {
