@@ -12,8 +12,17 @@ public class ReplenishmentPage extends BasePage {
         super(driver);
     }
 
+    private final By SELECT_HEADER_DROPDOWN = By.cssSelector(".select__header");
+    private final By COMMUNICATION_SERVICES_DROPDOWN = By.xpath("//p[contains (@class, 'select__option') and text() = 'Услуги связи']");
+    private final By HOME_INTERNET_DROPDOWN = By.xpath("//p[contains (@class, 'select__option') and text() = 'Домашний интернет']");
+    private final By ISTALLMENT_DROPDOWN = By.xpath("//p[contains (@class, 'select__option') and text() = 'Рассрочка']");
+    private final By DEBT_DROPDOWN = By.xpath("//p[contains (@class, 'select__option') and text() = 'Задолженность']");
     private final By PHONE_INPUT = By.id("connection-phone");
+    private final By INTERNET_PHONE = By.id("internet-phone");
+    private final By SCORE44_INPUT = By.id("score-instalment");
+    private final By SCORE2073_INPUT = By.id("score-arrears");
     private final By SUM_INPUT = By.id("connection-sum");
+    private final By EMAIL_INPUT = By.id("connection-email");
     private final By CONTINUE_BUTTON = By.cssSelector("button[class='button button__default ']");
     private final By BLOCK_OF_REPLENISHMENT = By.cssSelector("div.pay__wrapper>h2");
     private final By MORE_INFO_LINK = By.cssSelector("a[href='/help/poryadok-oplaty-i-bezopasnost-internet-platezhey/']");
@@ -104,5 +113,82 @@ public class ReplenishmentPage extends BasePage {
         WebElement framePayment = driver.findElement(IFRAME);
         wait.until(ExpectedConditions.visibilityOf(framePayment));
         return framePayment.isDisplayed();
+    }
+
+    @Description("Выбор Услуги связи в Дропдаун в Онлайн пополнение")
+    public void chooseCommServicesDropdown() {
+        driver.findElement(SELECT_HEADER_DROPDOWN).click();
+        driver.findElement(COMMUNICATION_SERVICES_DROPDOWN).click();
+    }
+
+    @Description("Выбор Домашнего интернета в Дропдаун в Онлайн пополнение")
+    public void chooseHomeInternetDropdown() {
+        driver.findElement(SELECT_HEADER_DROPDOWN).click();
+        driver.findElement(HOME_INTERNET_DROPDOWN).click();
+    }
+
+    @Description("Выбор Рассрочки в Дропдаун в Онлайн пополнение")
+    public void chooseInstallmentDropdown() {
+        driver.findElement(SELECT_HEADER_DROPDOWN).click();
+        driver.findElement(ISTALLMENT_DROPDOWN).click();
+    }
+
+    @Description("Выбор Задолженность в Дропдаун в Онлайн пополнение")
+    public void chooseDebtDropdown() {
+        driver.findElement(SELECT_HEADER_DROPDOWN).click();
+        driver.findElement(DEBT_DROPDOWN).click();
+    }
+
+    @Description("Проверка наличия текста в плейсхолдере Номер счета 44 в блоке Онлайн пополнения")
+    public String checkTextPlaceholderScore44() {
+        return driver.findElement(SCORE44_INPUT).getAttribute("placeholder");
+    }
+
+    @Description("Проверка наличия текста в плейсхолдере Номер абонента в блоке Онлайн пополнения")
+    public String checkTextPlaceholderInternetPhone() {
+        return driver.findElement(INTERNET_PHONE).getAttribute("placeholder");
+    }
+
+    @Description("Проверка наличия текста в плейсхолдере Телефон в блоке Онлайн пополнения")
+    public String checkTextInPlaceholderPhone() {
+        return driver.findElement(PHONE_INPUT).getAttribute("placeholder");
+    }
+
+    @Description("Проверка наличия текста в плейсхолдере Сумма в блоке Онлайн пополнения")
+    public String checkTextInPlaceholderSum() {
+        return driver.findElement(SUM_INPUT).getAttribute("placeholder");
+    }
+
+    @Description("Проверка наличия текста в плейсхолдере Email в блоке Онлайн пополнения")
+    public String checkTextInPlaceholderEmail() {
+        return driver.findElement(EMAIL_INPUT).getAttribute("placeholder");
+    }
+
+    @Description("Проверка наличия текста в плейсхолдере Номер счета 2073 в блоке Онлайн пополнения")
+    public String checkTextInPlaceholderScore2073() {
+        return driver.findElement(SCORE2073_INPUT).getAttribute("placeholder");
+    }
+
+    @Description("Нажатие на кнопку Продолжить")
+    public void clickContinueButton() {
+        driver.findElement(CONTINUE_BUTTON).click();
+    }
+
+    public void switchToFrame() {
+        WebElement framePayment = driver.findElement(IFRAME);
+        wait.until(ExpectedConditions.visibilityOf(framePayment));
+        driver.switchTo().frame(framePayment);
+    }
+
+    public String checkSumInFrame(String sum) {
+       return driver.findElement(By.xpath(String.format("//div[@class='pay-description__cost']//span[text()='%s']", sum))).getText();
+    }
+
+    public String checkPhoneInFrame() {
+        return driver.findElement(By.xpath("//span[@class='pay-description__text']")).getText();
+    }
+
+    public String checkSumInButton() {
+        return driver.findElement(By.xpath("//button[@type='submit']/ancestor::[@class='card-page__card-pay ng-star-inserted']")).getText();
     }
 }
