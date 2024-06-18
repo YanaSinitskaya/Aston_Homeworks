@@ -46,7 +46,7 @@ public class ReplenishmentPage extends BasePage {
         return driver.findElement(PAYMENT_INFO_BLOCK).getText();
     }
 
-    @Description("Отображение изображения Visa")
+    @Description("Отображение изображения Visa в блоке Онлайн пополнение")
     public boolean isImageVisaDisplayed() {
         WebElement imgVisa = driver.findElement(By.xpath("//img[@src='/local/templates/new_design/assets/html/images/pages/index/pay/visa.svg']"));
         JavascriptExecutor executor = (JavascriptExecutor) driver;
@@ -57,7 +57,7 @@ public class ReplenishmentPage extends BasePage {
         return isDisplayed;
     }
 
-    @Description("Отображение изображения Verified by Visa")
+    @Description("Отображение изображения Verified by Visa в блоке Онлайн пополнение")
     public boolean isImageVerifiedVisaDisplayed() {
         WebElement imgVerifiedVisa = driver.findElement(By.xpath("//img[@src='/local/templates/new_design/assets/html/images/pages/index/pay/visa-verified.svg']"));
         JavascriptExecutor executor = (JavascriptExecutor) driver;
@@ -68,7 +68,7 @@ public class ReplenishmentPage extends BasePage {
         return isDisplayed;
     }
 
-    @Description("Отображение изображения Mastercard")
+    @Description("Отображение изображения Mastercard в блоке Онлайн пополнение")
     public boolean isImageMastercardDisplayed() {
         WebElement imgMastercard = driver.findElement(By.xpath("//img[@src='/local/templates/new_design/assets/html/images/pages/index/pay/mastercard.svg']"));
         JavascriptExecutor executor = (JavascriptExecutor) driver;
@@ -79,7 +79,7 @@ public class ReplenishmentPage extends BasePage {
         return isDisplayed;
     }
 
-    @Description("Отображение изображения Mastercard Secure")
+    @Description("Отображение изображения Mastercard Secure в блоке Онлайн пополнение")
     public boolean isImageMastercardSecureDisplayed() {
         WebElement imgMastercardSecure = driver.findElement(By.xpath("//img[@src='/local/templates/new_design/assets/html/images/pages/index/pay/mastercard-secure.svg']"));
         JavascriptExecutor executor = (JavascriptExecutor) driver;
@@ -90,7 +90,7 @@ public class ReplenishmentPage extends BasePage {
         return isDisplayed;
     }
 
-    @Description("Отображение изображения Belcart")
+    @Description("Отображение изображения Belcart в блоке Онлайн пополнение")
     public boolean isImageBelcartDisplayed() {
         WebElement imgBelcart = driver.findElement(By.xpath("//img[@src='/local/templates/new_design/assets/html/images/pages/index/pay/belkart.svg']"));
         JavascriptExecutor executor = (JavascriptExecutor) driver;
@@ -98,6 +98,50 @@ public class ReplenishmentPage extends BasePage {
                 .executeScript("return arguments[0].complete "
                         + "&& typeof arguments[0].naturalWidth != \"undefined\" "
                         + "&& arguments[0].naturalWidth > 0", imgBelcart);
+        return isDisplayed;
+    }
+
+    @Description("Отображение изображения Mastercard в блоке Оплаты")
+    public boolean isImageMCDisplayedFrame() {
+        WebElement imgMastercardFrame= driver.findElement(By.xpath("//img[@src='assets/images/payment-icons/card-types/mastercard-system.svg']"));
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        Boolean isDisplayed = (Boolean) (executor)
+                .executeScript("return arguments[0].complete "
+                        + "&& typeof arguments[0].naturalWidth != \"undefined\" "
+                        + "&& arguments[0].naturalWidth > 0", imgMastercardFrame);
+        return isDisplayed;
+    }
+
+    @Description("Отображение изображения Visa в блоке Оплаты")
+    public boolean isImageVisaDisplayedFrame() {
+        WebElement imgVisaFrame = driver.findElement(By.xpath("//img[@src='assets/images/payment-icons/card-types/visa-system.svg']"));
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        Boolean isDisplayed = (Boolean) (executor)
+                .executeScript("return arguments[0].complete "
+                        + "&& typeof arguments[0].naturalWidth != \"undefined\" "
+                        + "&& arguments[0].naturalWidth > 0", imgVisaFrame);
+        return isDisplayed;
+    }
+
+    @Description("Отображение изображения Belcart в блоке Оплаты")
+    public boolean isImageBelcartDisplayedFrame() {
+        WebElement imgBelcartFrame = driver.findElement(By.xpath("//img[@src='assets/images/payment-icons/card-types/belkart-system.svg']"));
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        Boolean isDisplayed = (Boolean) (executor)
+                .executeScript("return arguments[0].complete "
+                        + "&& typeof arguments[0].naturalWidth != \"undefined\" "
+                        + "&& arguments[0].naturalWidth > 0", imgBelcartFrame);
+        return isDisplayed;
+    }
+
+    @Description("Отображение изображения Mir в блоке Оплаты")
+    public boolean isImageMirDisplayedFrame() {
+        WebElement imgMirFrame = driver.findElement(By.xpath("//img[@src='assets/images/payment-icons/card-types/mir-system-ru.svg']"));
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        Boolean isDisplayed = (Boolean) (executor)
+                .executeScript("return arguments[0].complete "
+                        + "&& typeof arguments[0].naturalWidth != \"undefined\" "
+                        + "&& arguments[0].naturalWidth > 0", imgMirFrame);
         return isDisplayed;
     }
 
@@ -174,21 +218,25 @@ public class ReplenishmentPage extends BasePage {
         driver.findElement(CONTINUE_BUTTON).click();
     }
 
+    @Description("Переход во фрейм")
     public void switchToFrame() {
         WebElement framePayment = driver.findElement(IFRAME);
         wait.until(ExpectedConditions.visibilityOf(framePayment));
         driver.switchTo().frame(framePayment);
     }
 
-    public String checkSumInFrame(String sum) {
-       return driver.findElement(By.xpath(String.format("//div[@class='pay-description__cost']//span[text()='%s']", sum))).getText();
+    @Description("Проверить сумму во фрейме")
+    public String checkSumInFrame() {
+        return driver.findElement(By.xpath("//div[@class='pay-description__cost']/span[1]")).getText();
     }
 
+    @Description("Проверить телефон во фрейме")
     public String checkPhoneInFrame() {
         return driver.findElement(By.xpath("//span[@class='pay-description__text']")).getText();
     }
 
+    @Description("Проверить сумму в кнопке Оплатить во фрейме")
     public String checkSumInButton() {
-        return driver.findElement(By.xpath("//button[@type='submit']/ancestor::[@class='card-page__card-pay ng-star-inserted']")).getText();
+        return driver.findElement(By.xpath("//div[@class='card-page__card']//button[@type='submit']")).getText();
     }
 }

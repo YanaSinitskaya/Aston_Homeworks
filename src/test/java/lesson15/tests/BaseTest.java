@@ -25,6 +25,7 @@ public class BaseTest {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("start-maximized");
         options.addArguments("--disable-notifications");
+        options.addArguments("headless");
         driver = new ChromeDriver(options);
         replenishmentPage = new ReplenishmentPage(driver);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
