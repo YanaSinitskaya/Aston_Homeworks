@@ -1,6 +1,5 @@
 package lesson15.tests;
 
-import org.checkerframework.checker.units.qual.A;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -77,16 +76,14 @@ public class Lesson16OnlineReplenishmentTest extends BaseTest {
         replenishmentPage.fillFields(phone, sum);
         replenishmentPage.clickContinueButton();
         replenishmentPage.switchToFrame();
-       // Assertions.assertEquals(sum, replenishmentPage.checkSumInFrame(), "Неверная сумма пополнения");
-        Assertions.assertTrue(replenishmentPage.checkSumInFrame().contains("15"));
-       /* Assertions.assertAll(
-                () -> Assertions.assertTrue(replenishmentPage.checkSumInFrame().contains(sum), "Неверная сумма пополнения"),
-                () -> Assertions.assertTrue(replenishmentPage.checkPhoneInFrame().contains(phone),"Неверный телефон"),
-                () -> Assertions.assertTrue(replenishmentPage.checkSumInButton().contains(sum), "Неверная сумма пополнения в кнопке Оплатить")
-        ); */
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(sum + " BYN", replenishmentPage.checkSumInFrame(), "Неверная сумма пополнения"),
+                () -> Assertions.assertEquals("Оплата: Услуги связи\nНомер:375" + phone, replenishmentPage.checkPhoneInFrame(), "Неверный телефон"),
+                () -> Assertions.assertEquals(" Оплатить  " + sum + " BYN ", replenishmentPage.checkSumInButton(), "Неверная сумма пополнения в кнопке Оплатить")
+        );
     }
 
-    @DisplayName("Л16 Задание 2: Проверка наличия изображений оплаты ")
+    @DisplayName("Л16 Задание 2: Проверка наличия изображений оплаты")
     @Test
     public void checkVisibilityOfImagesOfPaymentMethods() {
         replenishmentPage.openMainPage();
@@ -99,6 +96,22 @@ public class Lesson16OnlineReplenishmentTest extends BaseTest {
                 () -> Assertions.assertTrue(replenishmentPage.isImageVisaDisplayedFrame()),
                 () -> Assertions.assertTrue(replenishmentPage.isImageBelcartDisplayedFrame()),
                 () -> Assertions.assertTrue(replenishmentPage.isImageMirDisplayedFrame())
+        );
+    }
+
+    @DisplayName("Л16 Задание 2: Проверка текста в плейсхолдерах")
+    @Test
+    public void checkVisibilityOfTextInPlaceholdersInFrame() {
+        replenishmentPage.openMainPage();
+        replenishmentPage.chooseCommServicesDropdown();
+        replenishmentPage.fillFields("297777777", "15.00");
+        replenishmentPage.clickContinueButton();
+        replenishmentPage.switchToFrame();
+        Assertions.assertAll(
+                () -> Assertions.assertTrue(replenishmentPage.isCardNumberPlaceholderCardNumberInFrameDisplayed()),
+                () -> Assertions.assertTrue(replenishmentPage.isExpirationDatePlaceholderInFrameDisplayed()),
+                () -> Assertions.assertTrue(replenishmentPage.isCVCPlaceholderInFrameDisplayed()),
+                () -> Assertions.assertTrue(replenishmentPage.isNamePlaceholderInFrameDisplayed())
         );
     }
 }

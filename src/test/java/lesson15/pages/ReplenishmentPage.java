@@ -227,16 +227,36 @@ public class ReplenishmentPage extends BasePage {
 
     @Description("Проверить сумму во фрейме")
     public String checkSumInFrame() {
-        return driver.findElement(By.xpath("//div[@class='pay-description__cost']/span[1]")).getText();
+        return driver.findElement(By.xpath("//div[@class='pay-description__cost']/span[1]")).getAttribute("textContent");
     }
 
     @Description("Проверить телефон во фрейме")
     public String checkPhoneInFrame() {
-        return driver.findElement(By.xpath("//span[@class='pay-description__text']")).getText();
+        return driver.findElement(By.xpath("//span[@class='pay-description__text']")).getAttribute("textContent");
     }
 
     @Description("Проверить сумму в кнопке Оплатить во фрейме")
     public String checkSumInButton() {
-        return driver.findElement(By.xpath("//div[@class='card-page__card']//button[@type='submit']")).getText();
+        return driver.findElement(By.xpath("//div[@class='card-page__card']//button[@type='submit']")).getAttribute("textContent");
+    }
+
+    @Description("Проверить наличие текста плейсхолдера в форме Номер карты во фрейме")
+    public boolean isCardNumberPlaceholderCardNumberInFrameDisplayed() {
+        return driver.findElement(By.xpath("//div[@class='content ng-tns-c46-1']//label[text()='Номер карты']")).isEnabled();
+    }
+
+    @Description("Проверить наличие текста плейсхолдера в форме Cрок действия карты во фрейме")
+    public boolean isExpirationDatePlaceholderInFrameDisplayed() {
+        return driver.findElement(By.xpath("//div[@class='content ng-tns-c46-4']//label[text()='Срок действия']")).isEnabled();
+    }
+
+    @Description("Проверить наличие текста плейсхолдера в форме CVC во фрейме")
+    public boolean isCVCPlaceholderInFrameDisplayed() {
+        return driver.findElement(By.xpath("//div[@class='content ng-tns-c46-5']//label[text()='CVC']")).isEnabled();
+    }
+
+    @Description("Проверить наличие текста плейсхолдера в форме Имя Фамилия во фрейме")
+    public boolean isNamePlaceholderInFrameDisplayed() {
+        return driver.findElement(By.xpath("//div[@class='content ng-tns-c46-3']//label[text()='Имя держателя (как на карте)']")).isEnabled();
     }
 }
